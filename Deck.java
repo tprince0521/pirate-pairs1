@@ -31,7 +31,7 @@ public class Deck {
         System.out.println(Arrays.toString(cards));
     }
 
-    public int drawCard() {
+    public int giveCard() {
 
         int nextCard = cards[cards.length - 1];
         int[] newDeck = new int[cards.length - 1];
@@ -41,7 +41,6 @@ public class Deck {
         }
 
         cards = newDeck;
-
         return nextCard;
     }
 
