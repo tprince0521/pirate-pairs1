@@ -7,6 +7,7 @@ public class PiratePairs {
         Player player2 = new Player();
         Player player3 = new Player();
         Player player4 = new Player();
+
         players[0] = player1;
         players[1] = player2;
         players[2] = player3;
@@ -14,29 +15,61 @@ public class PiratePairs {
 
         int drawn;
 
-        //myDeck.show();
+        // myDeck.show();
 
         myDeck.shuffle();
-        //myDeck.show();
+        // myDeck.show();
 
         myDeck.giveCard();
-        //myDeck.show();
+        // myDeck.show();
 
-        for (int i = 0; i < 4; i++){
-            drawn = myDeck.giveCard();
-            Player[] handToCheck = new Player[1];
-            handToCheck[0] = players[i];
+        int playersOut = 0;
 
-            for (Player card : handToCheck) {
-                if (card == drawn) {
-                    
-               }
+        while (playersOut < 3) {
+            for (int i = 0; i < 4; i++) {
+
+                // continue checks if the player is out then skips their turn
+                if (players[i].getPoints() > 13) {
+                    continue;
+                }
+
+                drawn = myDeck.giveCard();
+
+                boolean match = false;
+
+                for (int card : players[i].getHand()) {
+                    if (card == drawn) {
+                        match = true;
+                        break;
+                    }
+                }
+
+                if (match) {
+                    players[i].addPoints(drawn);
+                    players[i].resetHand();
+                } else {
+                    players[i].takeCard(drawn);
+                }
+
+                players[i].showHand();
+                System.out.println(" player " + (i + 1) + " points: " + players[i].getPoints());
             }
 
-            players[i].takeCard(drawn);
-            players[i].showHand();
-        }
-        
+            System.out.println(" ");
+            System.out.println("------- NEXT ROUND -------");
+            System.out.println(" ");
 
+            playersOut = 0;
+
+            for (int i = 0; i < 4; i++) {
+                if (players[i].getPoints() > 13) {
+                    System.out.println("Player " + (i + 1) + " IS OUT");
+                    System.out.println(" ");
+
+                    playersOut++;
+                }
+            }
+
+        }
     }
 }

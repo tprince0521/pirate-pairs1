@@ -3,8 +3,9 @@ import java.util.Arrays;
 public class Player {
 
     int[] hand = new int[10];
+    int points = 0;
 
-    public Player(){
+    public Player() {
     }
 
     public void takeCard(int drawn) {
@@ -18,10 +19,23 @@ public class Player {
     }
 
     public void showHand() {
-        System.out.println(Arrays.toString(hand));
+        System.out.print(Arrays.toString(hand));
     }
 
-    public int[] getHand(){
+    public int[] getHand() {
         return hand;
     }
+
+    public void addPoints(int drawn) {
+        points += drawn;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void resetHand() {
+        this.hand = new int[10];
+    }
+
 }

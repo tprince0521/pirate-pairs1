@@ -21,6 +21,7 @@ public class Deck {
         for (int i = cards.length - 1; i >= 0; i--) {
             int j = (int) (Math.random() * (i + 1));
 
+            // fisher-yates algorithm; i got this off the internet
             int temp = cards[i];
             cards[i] = cards[j];
             cards[j] = temp;
